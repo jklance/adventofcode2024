@@ -44,26 +44,29 @@ func flipDataFields(data [][]string) [][]int {
 	return inData
 }
 
-func calculateDistance(data[][] int) int {
-	dist := 0
+func calculateSimilarity(data[][] int) int {
+	sim := 0
 
 	for i := 0; i < len(data[0]); i++ {
-		if data[0][i] > data[1][i] {
-			dist = dist + (data[0][i] - data[1][i])
-		} else {
-			dist = dist + (data[1][i] - data[0][i])
+		count := 0
+		for j := 0; j < len(data[1]); j++ {
+			if data[0][i] == data[1][j] {
+				count++
+			}
 		}
+		sim = sim + (data[0][i] * count)
+
 	}
 
-	return dist
+	return sim
 }
 
 func main() {
 	inData := getDataFields()
 	dataFields := flipDataFields(inData)
 
-	distance := calculateDistance(dataFields)
+	similarity := calculateSimilarity(dataFields)
 
-	fmt.Println(distance)
+	fmt.Println(similarity)
 
 }
